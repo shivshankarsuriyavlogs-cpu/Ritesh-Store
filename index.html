@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ritesh Store - Fresh Dairy Products</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header & Banner */
+    .banner {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(106, 176, 76, 0.8), rgba(74, 137, 220, 0.8));
+      z-index: 1;
+    }
+
+    .banner img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner h1 {
+      position: relative;
+      z-index: 2;
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .banner p {
+      position: relative;
+      z-index: 2;
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    .nav-tabs {
+      display: flex;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-tab {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav-tab.active {
+      border-bottom: 3px solid #6ab04c;
+      background: #f0f7ff;
+      font-weight: 600;
+    }
+
+    .nav-tab:hover {
+      background: #f0f7ff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Main Layout */
+    .main-container {
+      display: flex;
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    aside {
+      flex: 1;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    main {
+      flex: 2;
+    }
+
+    /* Forms */
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #6ab04c;
+      box-shadow: 0 0 0 3px rgba(106, 176, 76, 0.2);
+    }
+
+    button {
+      background: #6ab04c;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #5a9c3f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary {
+      background: #3498db;
+    }
+
+    .btn-secondary:hover {
+      background: #2980b9;
+    }
+
+    .btn-danger {
+      background: #e74c3c;
+    }
+
+    .btn-danger:hover {
+      background: #c0392b;
+    }
+
+    .btn-small {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      width: auto;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* Sections */
+    section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    section h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f0f0f0;
+      font-size: 1.8rem;
+    }
+
+    /* Product List */
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .product {
+      background: #f8f9fa;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product-content {
+      padding: 20px;
+    }
+
+    .product h3 {
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .product p {
+      color: #666;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+
+    .product-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .product-buttons button {
+      flex: 1;
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+
+    .product-buttons button:first-child {
+      background: #3498db;
+    }
+
+    .product-buttons button:first-child:hover {
+      background: #2980b9;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      padding: 30px;
+      position: relative;
+      animation: modalFade 0.3s;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes modalFade {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #777;
+    }
+
+    .close:hover {
+      color: #333;
+    }
+
+    /* Order List */
+    .order-list {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+
+    .order-item {
+      background: #f8f9fa;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #6ab04c;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .order-actions button {
+      flex: 1;
+      padding: 8px;
+      font-size: 0.85rem;
+    }
+
+    /* Customer Welcome */
+    .customer-welcome {
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Track Order Section */
+    .track-order {
+      background: #fff9e6;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .track-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .track-form input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .track-status {
+      padding: 15px;
+      border-radius: 8px;
+      background: #f8f9fa;
+      margin-top: 15px;
+    }
+
+    .status-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .status-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #ddd;
+      z-index: 1;
+    }
+
+    .status-step {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      flex: 1;
+    }
+
+    .status-step.active .step-icon {
+      background: #6ab04c;
+      color: white;
+    }
+
+    .status-step.completed .step-icon {
+      background: #6ab04c;
+      color: white;
+    }
+
+    .step-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    /* Customer Profile */
+    .customer-profile {
+      margin-top: 20px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #3498db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .profile-info h3 {
+      margin-bottom: 5px;
+    }
+
+    .customer-orders {
+      margin-top: 20px;
+    }
+
+    /* App Download Section */
+    .app-download {
+      background: linear-gradient(135deg, #6ab04c, #3498db);
+      color: white;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .app-download h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .app-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .app-button {
+      display: flex;
+      align-items: center;
+      background: white;
+      color: #333;
+      padding: 15px 25px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .app-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .app-button i {
+      font-size: 2rem;
+      margin-right: 10px;
+    }
+
+    /* About Section */
+    .about-section {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      margin: 40px 0;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 2;
+    }
+
+    .about-contact {
+      flex: 1;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    /* Owner Dashboard */
+    .owner-controls {
+      margin-top: 20px;
+    }
+
+    .control-section {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .control-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-buttons button {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    /* Product Management */
+    .product-management {
+      margin-top: 20px;
+    }
+
+    .product-edit-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .product-edit-form .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: linear-gradient(135deg, #6ab04c, #3498db);
+      color: white;
+    }
+
+    #contact h2 {
+      color: white;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    #contact label {
+      color: white;
+    }
+
+    #contact input, #contact textarea {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+    }
+
+    #contact button {
+      background: white;
+      color: #3498db;
+    }
+
+    #contact button:hover {
+      background: #f0f0f0;
+    }
+
+    /* Footer */
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 50px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      
+      .banner h1 {
+        font-size: 2.5rem;
+      }
+      
+      .banner p {
+        font-size: 1.1rem;
+      }
+      
+      .product-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .order-actions {
+        flex-direction: column;
+      }
+      
+      .app-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .nav-tabs {
+        flex-wrap: wrap;
+      }
+      
+      .nav-tab {
+        flex: 1 0 50%;
+      }
+      
+      .product-edit-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .control-buttons button {
+        min-width: 100%;
+      }
+      
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="banner">
+    <img id="bannerImage" src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=1200&q=80" alt="Milk Banner">
+    <h1 id="storeName">Ritesh Store</h1>
+    <p id="storeTagline">Fresh Dairy Products Delivered to Your Doorstep</p>
+  </div>
+
+  <div class="container">
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <div class="nav-tab active" data-tab="products">Products</div>
+      <div class="nav-tab" data-tab="track">Track Order</div>
+      <div class="nav-tab" data-tab="reviews">Reviews</div>
+      <div class="nav-tab" data-tab="about">About Us</div>
+    </div>
+
+    <div class="tab-content active" id="products-tab">
+      <div class="main-container">
+        <aside class="owner-login">
+          <h2><i class="fas fa-user-shield"></i> Owner Login</h2>
+          <form id="ownerLoginForm">
+            <label>Mobile Number:</label>
+            <input type="text" id="ownerMobile" required placeholder="Enter mobile number">
+            <label>Password:</label>
+            <input type="password" id="ownerPassword" required placeholder="Enter password">
+            <button type="submit">Login</button>
+          </form>
+          <div id="ownerDashboard" style="display:none;">
+            <h3>Owner Dashboard</h3>
+            <p>Total Orders: <span id="totalOrders">0</span></p>
+            
+            <div class="owner-controls">
+              <div class="control-section">
+                <h4>Store Customization</h4>
+                <div class="control-buttons">
+                  <button onclick="openCustomizeModal()" class="btn-secondary">Customize Store</button>
+                  <button onclick="openProductManagement()" class="btn-secondary">Manage Products</button>
+                </div>
+              </div>
+              
+              <div class="control-section">
+                <h4>Order Management</h4>
+                <div id="orderList" class="order-list">
+                  <!-- Orders will appear here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <main>
+          <section class="customer-login">
+            <h2><i class="fas fa-user"></i> Customer Login</h2>
+            <form id="customerLoginForm">
+              <label>Gmail:</label>
+              <input type="email" id="customerGmail" required placeholder="Enter your Gmail">
+              <label>Password:</label>
+              <input type="password" id="customerPassword" required placeholder="Enter password">
+              <button type="submit">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">
+              Don't have an account? <a href="#" id="showRegister" style="color: #3498db; text-decoration: none;">Register here</a>
+            </p>
+            <form id="customerRegisterForm" style="display:none;">
+              <label>Gmail:</label>
+              <input type="email" id="registerGmail" required placeholder="Enter your Gmail">
+              <label>Password:</label>
+              <input type="password" id="registerPassword" required placeholder="Create password">
+              <label>Name:</label>
+              <input type="text" id="registerName" required placeholder="Enter your name">
+              <button type="submit">Register</button>
+            </form>
+            <div id="customerWelcome" class="customer-welcome" style="display:none;">
+              <div class="profile-header">
+                <div class="profile-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-info">
+                  <h3 id="customerName">Customer Name</h3>
+                  <p id="customerEmail">customer@example.com</p>
+                </div>
+              </div>
+              <p>You can now place orders and track them in your profile.</p>
+            </div>
+          </section>
+          
+          <section id="products">
+            <h2><i class="fas fa-shopping-basket"></i> Our Products</h2>
+            <div id="productList" class="product-list">
+              <!-- Products will be dynamically loaded here -->
+            </div>
+          </section>
+          
+          <!-- Customer Orders Section (Visible after login) -->
+          <section id="customerOrders" class="customer-orders" style="display:none;">
+            <h2><i class="fas fa-clipboard-list"></i> My Orders</h2>
+            <div id="customerOrderList" class="order-list">
+              <!-- Customer's orders will appear here -->
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Track Order Tab -->
+    <div class="tab-content" id="track-tab">
+      <section>
+        <h2><i class="fas fa-shipping-fast"></i> Track Your Order</h2>
+        <div class="track-order">
+          <p>Enter your order ID to track the status of your delivery:</p>
+          <div class="track-form">
+            <input type="text" id="trackOrderId" placeholder="Enter your order ID">
+            <button onclick="trackOrder()" class="btn-small">Track Order</button>
+          </div>
+          <div id="trackResult" class="track-status" style="display:none;">
+            <h3>Order #<span id="trackOrderNumber"></span> Status: <span id="orderStatusText">Pending</span></h3>
+            <div class="status-steps">
+              <div class="status-step completed" id="step1">
+                <div class="step-icon"><i class="fas fa-check"></i></div>
+                <div>Order Placed</div>
+              </div>
+              <div class="status-step" id="step2">
+                <div class="step-icon"><i class="fas fa-cog"></i></div>
+                <div>Processing</div>
+              </div>
+              <div class="status-step" id="step3">
+                <div class="step-icon"><i class="fas fa-shipping-fast"></i></div>
+                <div>Out for Delivery</div>
+              </div>
+              <div class="status-step" id="step4">
+                <div class="step-icon"><i class="fas fa-home"></i></div>
+                <div>Delivered</div>
+              </div>
+            </div>
+            <div id="orderDetails" style="margin-top: 15px;">
+              <!-- Order details will appear here -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Reviews Tab -->
+    <div class="tab-content" id="reviews-tab">
+      <section>
+        <h2><i class="fas fa-star"></i> Customer Reviews</h2>
+        <div class="review-list">
+          <div class="review-item">
+            <h4>Rahul Sharma</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"The milk from Ritesh Store is always fresh and pure. I've been a regular customer for over a year now."</p>
+          </div>
+          <div class="review-item">
+            <h4>Priya Patel</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>"Their ghee has an authentic taste that reminds me of my grandmother's homemade ghee. Highly recommended!"</p>
+          </div>
+          <div class="review-item">
+            <h4>Amit Kumar</h4>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"The paneer is so fresh and soft. Perfect for making my favorite paneer butter masala. Delivery is always on time."</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- About Us Tab -->
+    <div class="tab-content" id="about-tab">
+      <section class="about-section">
+        <h2><i class="fas fa-info-circle"></i> About Ritesh Store</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>Ritesh Store is a family-owned dairy business dedicated to providing the freshest and highest quality dairy products to our customers. Established with a vision to bring pure, unadulterated dairy products directly from farms to your doorstep.</p>
+            <p>We take pride in our traditional methods of production while maintaining the highest standards of hygiene and quality. Our products are sourced from trusted local farmers who share our commitment to quality and sustainability.</p>
+            <p>Whether it's our fresh milk, pure ghee, or homemade paneer, we ensure that every product meets our strict quality standards before reaching you.</p>
+          </div>
+          <div class="about-contact">
+            <h3>Contact Information</h3>
+            <p><i class="fas fa-user"></i> Owner: Ritesh Yadav</p>
+            <p><i class="fas fa-phone"></i> Mobile: 9102481161</p>
+            <p><i class="fas fa-map-marker-alt"></i> Address: Bariyahi Shankarpur, Madhepura, Bihar</p>
+            <p><i class="fas fa-code"></i> Developer: Shivshankar Yadav</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- App Download Section -->
+    <div class="app-download">
+      <h2>Download Our App & Claim Special Offers!</h2>
+      <p>Get exclusive discounts and easy ordering with our mobile app</p>
+      <div class="app-buttons">
+        <a href="#" class="app-button">
+          <i class="fab fa-apple"></i>
+          <div>
+            <div>Download on the</div>
+            <div>App Store</div>
+          </div>
+        </a>
+        <a href="#" class="app-button">
+          <i class="fab fa-google-play"></i>
+          <div>
+            <div>GET IT ON</div>
+            <div>Google Play</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Buy Now Form -->
+  <div id="buyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Enter Delivery Details</h2>
+      <form id="buyForm">
+        <input type="hidden" id="selectedProduct" name="product">
+        
+        <div id="quantityField" style="display:none;">
+          <label for="quantity">Quantity (Liters for Milk, Kgs for others):</label>
+          <input type="number" id="quantity" name="quantity" min="0.5" step="0.5" value="1">
+        </div>
+        
+        <label>Name:</label>
+        <input type="text" name="name" required placeholder="Your full name">
+        
+        <label>Mobile:</label>
+        <input type="text" name="mobile" required placeholder="Your mobile number">
+        
+        <label>Address:</label>
+        <textarea name="address" required placeholder="Your complete delivery address" rows="3"></textarea>
+        
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for Store Customization -->
+  <div id="customizeModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCustomizeModal()">&times;</span>
+      <h2>Customize Your Store</h2>
+      <form id="customizeForm">
+        <label>Store Name:</label>
+        <input type="text" id="customStoreName" placeholder="Enter store name">
+        
+        <label>Store Tagline:</label>
+        <input type="text" id="customStoreTagline" placeholder="Enter store tagline">
+        
+        <label>Banner Image URL:</label>
+        <input type="text" id="customBannerImage" placeholder="Enter banner image URL">
+        
+        <label>Store Description (About Us):</label>
+        <textarea id="customStoreDescription" placeholder="Enter store description" rows="4"></textarea>
+        
+        <label>Contact Information:</label>
+        <textarea id="customContactInfo" placeholder="Enter contact information" rows="3"></textarea>
+        
+        <button type="button" onclick="saveStoreCustomization()" class="btn-full">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for Product Management -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeProductModal()">&times;</span>
+      <h2>Manage Products</h2>
+      
+      <div class="product-management">
+        <h3>Add New Product</h3>
+        <form id="addProductForm" class="product-edit-form">
+          <input type="text" id="newProductName" placeholder="Product Name" required>
+          <input type="text" id="newProductImage" placeholder="Image URL" required>
+          <textarea id="newProductDescription" placeholder="Product Description" class="full-width" required></textarea>
+          <button type="button" onclick="addNewProduct()" class="btn-full">Add Product</button>
+        </form>
+        
+        <h3>Existing Products</h3>
+        <div id="productEditList">
+          <!-- Products will be listed here for editing -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="contact">
+    <div class="container">
+      <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+      <form id="contactForm">
+        <label>Name:</label>
+        <input type="text" name="name" required placeholder="Your name">
+        <label>Email:</label>
+        <input type="email" name="email" required placeholder="Your email">
+        <label>Message:</label>
+        <textarea name="message" required placeholder="Your message" rows="4"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 <span id="footerStoreName">Ritesh Store</span> | All Rights Reserved</p>
+      <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+        <i class="fas fa-map-marker-alt"></i> Bariyahi Shankarpur, Madhepura, Bihar | 
+        <i class="fas fa-phone"></i> +91 9102481161
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Store Data
+    let storeData = {
+      name: "Ritesh Store",
+      tagline: "Fresh Dairy Products Delivered to Your Doorstep",
+      bannerImage: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=1200&q=80",
+      description: "Ritesh Store is a family-owned dairy business dedicated to providing the freshest and highest quality dairy products to our customers.",
+      contactInfo: "Owner: Ritesh Yadav | Mobile: 9102481161 | Address: Bariyahi Shankarpur, Madhepura, Bihar"
+    };
+
+    // Product Data
+    let products = [
+      {
+        id: 1,
+        name: "Fresh Milk",
+        image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80",
+        description: "Pure, fresh milk delivered daily. Rich in calcium and vitamins."
+      },
+      {
+        id: 2,
+        name: "Pure Ghee",
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+        description: "Organic ghee made from fresh milk. Rich in flavor and nutrients."
+      },
+      {
+        id: 3,
+        name: "Fresh Paneer",
+        image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/11/paneer-cubes.jpg",
+        description: "Homemade paneer, soft and fresh. Perfect for your favorite dishes."
+      }
+    ];
+
+    // Order Data
+    let orders = [];
+    let customers = [];
+    let isCustomerLoggedIn = false;
+    let currentCustomer = null;
+
+    // DOM Elements
+    const ownerLoginForm = document.getElementById('ownerLoginForm');
+    const ownerDashboard = document.getElementById('ownerDashboard');
+    const orderList = document.getElementById('orderList');
+    const totalOrdersSpan = document.getElementById('totalOrders');
+    const customerLoginForm = document.getElementById('customerLoginForm');
+    const customerRegisterForm = document.getElementById('customerRegisterForm');
+    const customerWelcome = document.getElementById('customerWelcome');
+    const customerOrdersSection = document.getElementById('customerOrders');
+    const customerOrderList = document.getElementById('customerOrderList');
+    const showRegisterLink = document.getElementById('showRegister');
+    const buyModal = document.getElementById('buyModal');
+    const buyForm = document.getElementById('buyForm');
+    const contactForm = document.getElementById('contactForm');
+    const quantityField = document.getElementById('quantityField');
+    const quantityInput = document.getElementById('quantity');
+    const navTabs = document.querySelectorAll('.nav-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const productList = document.getElementById('productList');
+    const customizeModal = document.getElementById('customizeModal');
+    const productModal = document.getElementById('productModal');
+
+    // Initialize the page
+    function initializePage() {
+      updateStoreDisplay();
+      displayProducts();
+      
+      // Load saved data from localStorage if available
+      const savedStoreData = localStorage.getItem('ritesStoreData');
+      const savedProducts = localStorage.getItem('ritesStoreProducts');
+      const savedOrders = localStorage.getItem('ritesStoreOrders');
+      const savedCustomers = localStorage.getItem('ritesStoreCustomers');
+      
+      if (savedStoreData) {
+        storeData = JSON.parse(savedStoreData);
+        updateStoreDisplay();
+      }
+      
+      if (savedProducts) {
+        products = JSON.parse(savedProducts);
+        displayProducts();
+      }
+      
+      if (savedOrders) {
+        orders = JSON.parse(savedOrders);
+      }
+      
+      if (savedCustomers) {
+        customers = JSON.parse(savedCustomers);
+      }
+      
+      // Check if customer is already logged in
+      const loggedInCustomer = localStorage.getItem('ritesStoreLoggedInCustomer');
+      if (loggedInCustomer) {
+        currentCustomer = JSON.parse(loggedInCustomer);
+        isCustomerLoggedIn = true;
+        showCustomerDashboard();
+      }
+    }
+
+    // Update store display with current data
+    function updateStoreDisplay() {
+      document.getElementById('storeName').textContent = storeData.name;
+      document.getElementById('storeTagline').textContent = storeData.tagline;
+      document.getElementById('bannerImage').src = storeData.bannerImage;
+      document.getElementById('footerStoreName').textContent = storeData.name;
+      
+      // Update about section if it exists
+      const aboutText = document.querySelector('.about-text p');
+      if (aboutText) {
+        aboutText.textContent = storeData.description;
+      }
+    }
+
+    // Display products on the page
+    function displayProducts() {
+      productList.innerHTML = '';
+      
+      products.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.className = 'product';
+        productElement.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <div class="product-content">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <div class="product-buttons">
+              <button onclick="addToCart('${product.name}')">Add to Cart</button>
+              <button onclick="buyNow('${product.name}')">Buy Now</button>
+            </div>
+          </div>
+        `;
+        productList.appendChild(productElement);
+      });
+    }
+
+    // Navigation Tabs
+    navTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+        
+        // Remove active class from all tabs and contents
+        navTabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        tab.classList.add('active');
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+      });
+    });
+
+    // Owner Login
+    ownerLoginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const mobile = document.getElementById('ownerMobile').value;
+      const password = document.getElementById('ownerPassword').value;
+      
+      // Validation as requested
+      if (mobile && password === "8969") {
+        ownerLoginForm.style.display = 'none';
+        ownerDashboard.style.display = 'block';
+        displayOrders();
+      } else {
+        alert('Invalid credentials. Password must be 8969');
+      }
+    });
+
+    // Display orders in owner dashboard
+    function displayOrders() {
+      orderList.innerHTML = '';
+      totalOrdersSpan.textContent = orders.length;
+      
+      if (orders.length === 0) {
+        orderList.innerHTML = '<p>No orders yet.</p>';
+        return;
+      }
+      
+      orders.forEach(order => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
+        orderItem.innerHTML = `
+          <h4>Order #${order.id}</h4>
+          <p><strong>Product:</strong> ${order.product} ${order.quantity ? `(${order.quantity} ${order.product === 'Milk' ? 'Liters' : 'Kgs'})` : ''}</p>
+          <p><strong>Customer:</strong> ${order.customer}</p>
+          <p><strong>Mobile:</strong> ${order.mobile}</p>
+          <p><strong>Address:</strong> ${order.address}</p>
+          <p><strong>Status:</strong> <span style="color: ${order.status === 'Delivered' ? '#6ab04c' : order.status === 'In Progress' ? '#3498db' : '#e74c3c'}">${order.status}</span></p>
+          <div class="order-actions">
+            <button class="btn-secondary" onclick="confirmOrder(${order.id})">Confirm</button>
+            <button class="btn-danger" onclick="cancelOrder(${order.id})">Cancel</button>
+          </div>
+        `;
+        orderList.appendChild(orderItem);
+      });
+    }
+
+    // Confirm order function
+    function confirmOrder(orderId) {
+      const orderIndex = orders.findIndex(order => order.id === orderId);
+      if (orderIndex !== -1) {
+        orders[orderIndex].status = 'In Progress';
+        
+        // Save to localStorage
+        localStorage.setItem('ritesStoreOrders', JSON.stringify(orders));
+        
+        displayOrders();
+        alert(`Order #${orderId} has been confirmed and is now in progress.`);
+      }
+    }
+
+    // Cancel order function
+    function cancelOrder(orderId) {
+      if (confirm('Are you sure you want to cancel this order?')) {
+        const orderIndex = orders.findIndex(order => order.id === orderId);
+        if (orderIndex !== -1) {
+          orders[orderIndex].status = 'Cancelled';
+          
+          // Save to localStorage
+          localStorage.setItem('ritesStoreOrders', JSON.stringify(orders));
+          
+          displayOrders();
+          alert(`Order #${orderId} has been cancelled.`);
+        }
+      }
+    }
+
+    // Customer Login/Register Toggle
+    showRegisterLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      customerLoginForm.style.display = 'none';
+      customerRegisterForm.style.display = 'block';
+    });
+
+    // Customer Login
+    customerLoginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const gmail = document.getElementById('customerGmail').value;
+      const password = document.getElementById('customerPassword').value;
+      
+      // Simple validation for demo
+      if (gmail && password) {
+        // Check if customer exists
+        const customer = customers.find(c => c.email === gmail && c.password === password);
+        
+        if (customer) {
+          isCustomerLoggedIn = true;
+          currentCustomer = customer;
+          
+          // Save login state
+          localStorage.setItem('ritesStoreLoggedInCustomer', JSON.stringify(currentCustomer));
+          
+          showCustomerDashboard();
+        } else {
+          alert('Invalid credentials. Please check your email and password.');
+        }
+      } else {
+        alert('Please enter valid credentials');
+      }
+    });
+
+    // Customer Registration
+    customerRegisterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const gmail = document.getElementById('registerGmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const name = document.getElementById('registerName').value;
+      
+      // Basic Gmail validation
+      if (!gmail.endsWith('@gmail.com')) {
+        alert('Please enter a valid Gmail address');
+        return;
+      }
+      
+      if (gmail && password && name) {
+        // Check if customer already exists
+        const existingCustomer = customers.find(c => c.email === gmail);
+        if (existingCustomer) {
+          alert('An account with this email already exists. Please login.');
+          return;
+        }
+        
+        const newCustomer = {
+          id: customers.length + 1,
+          name: name,
+          email: gmail,
+          password: password
+        };
+        
+        customers.push(newCustomer);
+        
+        // Save to localStorage
+        localStorage.setItem('ritesStoreCustomers', JSON.stringify(customers));
+        
+        alert('Registration successful! Please login with your credentials.');
+        customerRegisterForm.style.display = 'none';
+        customerLoginForm.style.display = 'block';
+      } else {
+        alert('Please fill all fields');
+      }
+    });
+
+    // Show customer dashboard after login
+    function showCustomerDashboard() {
+      customerLoginForm.style.display = 'none';
+      customerWelcome.style.display = 'block';
+      customerOrdersSection.style.display = 'block';
+      
+      document.getElementById('customerName').textContent = currentCustomer.name;
+      document.getElementById('customerEmail').textContent = currentCustomer.email;
+      
+      displayCustomerOrders();
+    }
+
+    // Display customer's orders
+    function displayCustomerOrders() {
+      customerOrderList.innerHTML = '';
+      
+      const customerOrders = orders.filter(order => order.customerEmail === currentCustomer.email);
+      
+      if (customerOrders.length === 0) {
+        customerOrderList.innerHTML = '<p>You have no orders yet.</p>';
+        return;
+      }
+      
+      customerOrders.forEach(order => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
+        orderItem.innerHTML = `
+          <h4>Order #${order.id}</h4>
+          <p><strong>Product:</strong> ${order.product} ${order.quantity ? `(${order.quantity} ${order.product === 'Milk' ? 'Liters' : 'Kgs'})` : ''}</p>
+          <p><strong>Order Date:</strong> ${order.date}</p>
+          <p><strong>Status:</strong> <span style="color: ${order.status === 'Delivered' ? '#6ab04c' : order.status === 'In Progress' ? '#3498db' : order.status === 'Cancelled' ? '#e74c3c' : '#f39c12'}">${order.status}</span></p>
+          <p><strong>Track Your Order:</strong> Use Order ID: <strong>${order.id}</strong></p>
+          <div class="order-actions">
+            <button class="btn-secondary" onclick="trackOrderById(${order.id})">Track This Order</button>
+          </div>
+        `;
+        customerOrderList.appendChild(orderItem);
+      });
+    }
+
+    // Product Functions
+    function addToCart(product) {
+      if (!isCustomerLoggedIn) {
+        alert('Please login first to add products to cart.');
+        return;
+      }
+      alert(`${product} added to cart!`);
+    }
+
+    function buyNow(product) {
+      if (!isCustomerLoggedIn) {
+        alert('Please login first to place an order.');
+        return;
+      }
+      
+      document.getElementById('selectedProduct').value = product;
+      
+      // Show quantity field
+      quantityField.style.display = 'block';
+      quantityInput.placeholder = product === 'Milk' ? 'Enter liters (e.g., 1.5)' : 'Enter quantity in Kgs (e.g., 0.5)';
+      
+      buyModal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      buyModal.style.display = 'none';
+      quantityField.style.display = 'none';
+    }
+
+    // Buy Form Submission
+    buyForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (!isCustomerLoggedIn) {
+        alert('Please login first to place an order.');
+        return;
+      }
+      
+      const formData = new FormData(this);
+      const product = formData.get('product');
+      const quantity = formData.get('quantity');
+      const name = formData.get('name');
+      const mobile = formData.get('mobile');
+      const address = formData.get('address');
+      
+      // Add to orders
+      const newOrder = {
+        id: orders.length + 1,
+        product: product,
+        quantity: quantity,
+        customer: name,
+        mobile: mobile,
+        address: address,
+        status: "Pending",
+        customerEmail: currentCustomer.email,
+        date: new Date().toLocaleDateString('en-IN')
+      };
+      orders.push(newOrder);
+      
+      // Save to localStorage
+      localStorage.setItem('ritesStoreOrders', JSON.stringify(orders));
+      
+      alert(`Order placed successfully! Your order ID is #${newOrder.id}. You can track it in your profile.`);
+      closeModal();
+      this.reset();
+      
+      // Update order list if owner is logged in
+      if (ownerDashboard.style.display === 'block') {
+        displayOrders();
+      }
+      
+      // Update customer's order list
+      displayCustomerOrders();
+    });
+
+    // Track Order Function
+    function trackOrder() {
+      const orderId = document.getElementById('trackOrderId').value;
+      trackOrderById(orderId);
+    }
+
+    function trackOrderById(orderId) {
+      const trackResult = document.getElementById('trackResult');
+      
+      if (!orderId) {
+        alert('Please enter an order ID');
+        return;
+      }
+      
+      const order = orders.find(o => o.id == orderId);
+      
+      if (order) {
+        document.getElementById('trackOrderNumber').textContent = order.id;
+        document.getElementById('orderStatusText').textContent = order.status;
+        trackResult.style.display = 'block';
+        
+        // Update status steps based on order status
+        const steps = document.querySelectorAll('.status-step');
+        steps.forEach(step => {
+          step.classList.remove('active', 'completed');
+        });
+        
+        // Step 1 is always completed if order exists
+        steps[0].classList.add('completed');
+        
+        if (order.status === 'Pending') {
+          steps[1].classList.add('active');
+        } else if (order.status === 'In Progress') {
+          steps[1].classList.add('completed');
+          steps[2].classList.add('active');
+        } else if (order.status === 'Delivered') {
+          steps[1].classList.add('completed');
+          steps[2].classList.add('completed');
+          steps[3].classList.add('completed');
+        } else if (order.status === 'Cancelled') {
+          // For cancelled orders, show all steps as greyed out
+          steps.forEach(step => {
+            step.classList.add('cancelled');
+          });
+        }
+        
+        // Display order details
+        const orderDetails = document.getElementById('orderDetails');
+        orderDetails.innerHTML = `
+          <h4>Order Details:</h4>
+          <p><strong>Product:</strong> ${order.product}</p>
+          <p><strong>Quantity:</strong> ${order.quantity} ${order.product === 'Milk' ? 'Liters' : 'Kgs'}</p>
+          <p><strong>Customer:</strong> ${order.customer}</p>
+          <p><strong>Delivery Address:</strong> ${order.address}</p>
+          <p><strong>Order Date:</strong> ${order.date}</p>
+        `;
+        
+        // Switch to track tab
+        navTabs.forEach(tab => tab.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        document.querySelector('[data-tab="track"]').classList.add('active');
+        document.getElementById('track-tab').classList.add('active');
+      } else {
+        alert('Order not found. Please check your order ID.');
+      }
+    }
+
+    // Store Customization Functions
+    function openCustomizeModal() {
+      document.getElementById('customStoreName').value = storeData.name;
+      document.getElementById('customStoreTagline').value = storeData.tagline;
+      document.getElementById('customBannerImage').value = storeData.bannerImage;
+      document.getElementById('customStoreDescription').value = storeData.description;
+      document.getElementById('customContactInfo').value = storeData.contactInfo;
+      
+      customizeModal.style.display = 'flex';
+    }
+
+    function closeCustomizeModal() {
+      customizeModal.style.display = 'none';
+    }
+
+    function saveStoreCustomization() {
+      storeData.name = document.getElementById('customStoreName').value || storeData.name;
+      storeData.tagline = document.getElementById('customStoreTagline').value || storeData.tagline;
+      storeData.bannerImage = document.getElementById('customBannerImage').value || storeData.bannerImage;
+      storeData.description = document.getElementById('customStoreDescription').value || storeData.description;
+      storeData.contactInfo = document.getElementById('customContactInfo').value || storeData.contactInfo;
+      
+      // Save to localStorage
+      localStorage.setItem('ritesStoreData', JSON.stringify(storeData));
+      
+      updateStoreDisplay();
+      closeCustomizeModal();
+      alert('Store customization saved successfully!');
+    }
+
+    // Product Management Functions
+    function openProductManagement() {
+      displayProductEditList();
+      productModal.style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      productModal.style.display = 'none';
+    }
+
+    function displayProductEditList() {
+      const productEditList = document.getElementById('productEditList');
+      productEditList.innerHTML = '';
+      
+      products.forEach((product, index) => {
+        const productEditItem = document.createElement('div');
+        productEditItem.className = 'order-item';
+        productEditItem.innerHTML = `
+          <h4>${product.name}</h4>
+          <div class="product-edit-form">
+            <input type="text" value="${product.name}" id="editName${product.id}" placeholder="Product Name">
+            <input type="text" value="${product.image}" id="editImage${product.id}" placeholder="Image URL">
+            <textarea id="editDescription${product.id}" placeholder="Product Description" class="full-width">${product.description}</textarea>
+            <button type="button" onclick="updateProduct(${product.id})" class="btn-small btn-secondary">Update</button>
+            <button type="button" onclick="deleteProduct(${index})" class="btn-small btn-danger">Delete</button>
+          </div>
+        `;
+        productEditList.appendChild(productEditItem);
+      });
+    }
+
+    function addNewProduct() {
+      const name = document.getElementById('newProductName').value;
+      const image = document.getElementById('newProductImage').value;
+      const description = document.getElementById('newProductDescription').value;
+      
+      if (!name || !image || !description) {
+        alert('Please fill all fields');
+        return;
+      }
+      
+      const newProduct = {
+        id: products.length + 1,
+        name: name,
+        image: image,
+        description: description
+      };
+      
+      products.push(newProduct);
+      
+      // Save to localStorage
+      localStorage.setItem('ritesStoreProducts', JSON.stringify(products));
+      
+      displayProducts();
+      displayProductEditList();
+      
+      // Clear the form
+      document.getElementById('newProductName').value = '';
+      document.getElementById('newProductImage').value = '';
+      document.getElementById('newProductDescription').value = '';
+      
+      alert('Product added successfully!');
+    }
+
+    function updateProduct(productId) {
+      const name = document.getElementById(`editName${productId}`).value;
+      const image = document.getElementById(`editImage${productId}`).value;
+      const description = document.getElementById(`editDescription${productId}`).value;
+      
+      const productIndex = products.findIndex(p => p.id === productId);
+      
+      if (productIndex !== -1) {
+        products[productIndex].name = name;
+        products[productIndex].image = image;
+        products[productIndex].description = description;
+        
+        // Save to localStorage
+        localStorage.setItem('ritesStoreProducts', JSON.stringify(products));
+        
+        displayProducts();
+        alert('Product updated successfully!');
+      }
+    }
+
+    function deleteProduct(productIndex) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        products.splice(productIndex, 1);
+        
+        // Save to localStorage
+        localStorage.setItem('ritesStoreProducts', JSON.stringify(products));
+        
+        displayProducts();
+        displayProductEditList();
+        alert('Product deleted successfully!');
+      }
+    }
+
+    // Contact Form Submission
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+      if (e.target === buyModal) {
+        closeModal();
+      }
+      if (e.target === customizeModal) {
+        closeCustomizeModal();
+      }
+      if (e.target === productModal) {
+        closeProductModal();
+      }
+    });
+
+    // Initialize the page when loaded
+    window.addEventListener('DOMContentLoaded', initializePage);
+  </script>
+</body>
+</html>
